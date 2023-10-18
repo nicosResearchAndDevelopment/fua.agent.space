@@ -1,0 +1,39 @@
+{
+  "name": "@nrd/fua.agent.space",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/space.js",
+  "files": [
+    "src/*"
+  ],
+  "dependencies": {
+    "@nrd/fua.core.assert": "^1.0.0",
+    "@nrd/fua.core.is": "^1.0.0",
+    "@nrd/fua.module.space": "^1.0.0",
+    "@nrd/fua.module.persistence": "^1.0.0",
+    "@nrd/fua.module.rdf": "^1.0.1",
+    "@nrd/fua.resource.context": "^1.0.3"
+  },
+  "devDependencies": {
+    "mocha": "^8.2.1",
+    "expect": "^26.6.2",
+    "@nrd/fua.module.persistence.filesystem": "^1.0.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "mocha": {
+    "bail": false,
+    "recursive": false,
+    "spec": "test/*.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@git02.int.nsc.ag:10022/research/fua/agent/server.git"
+  },
+  "keywords": [
+    "server"
+  ],
+  "author": "spetrac@nicos-ag.com",
+  "license": "UNLICENSED"
+}
