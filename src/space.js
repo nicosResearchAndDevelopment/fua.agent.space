@@ -81,12 +81,28 @@ Space.initialize = async function (options = {}) {
 };
 
 /**
+ * @param {unknown} node
+ * @returns {node is fua.module.space.Node}
+ */
+Space.isNode = function (node) {
+    return node instanceof space.Node;
+};
+
+/**
  * @param {string | fua.module.space.Node} id
  * @returns {fua.module.space.Node}
  */
 Space.getNode = function (id) {
     assert(_Space.space, 'not initialized');
     return _Space.space.getNode(id);
+};
+
+/**
+ * @param {unknown} literal
+ * @returns {node is fua.module.space.Literal}
+ */
+Space.isLiteral = function (literal) {
+    return literal instanceof space.Literal;
 };
 
 /**
