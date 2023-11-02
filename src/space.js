@@ -7,12 +7,15 @@ assert(!global[identifier], 'unable to load a second uncached version of the sin
 Object.defineProperty(global, identifier, {value: Space, configurable: false, writable: false, enumerable: false});
 
 const
-    _Space  = Object.create(null),
-    is      = require('@nrd/fua.core.is'),
-    space   = require('@nrd/fua.module.space'),
-    persist = require('@nrd/fua.module.persistence'),
-    rdf     = require('@nrd/fua.module.rdf'),
-    context = require('@nrd/fua.resource.context');
+    _Space            = Object.create(null),
+    is                = require('@nrd/fua.core.is'),
+    space             = require('@nrd/fua.module.space'),
+    persist           = require('@nrd/fua.module.persistence'),
+    rdf               = require('@nrd/fua.module.rdf'),
+    context           = require('@nrd/fua.resource.context'),
+    InitializeOptions = {
+        context: is.validator.optional(is.object)
+    };
 
 Object.defineProperties(Space, {
     /** @type {fua.module.persistence.DataFactory | null} */
@@ -61,11 +64,17 @@ _Space.requireStoreModule = function (type) {
 };
 
 Space.initialize = async function (options = {}) {
-    assert.object(options);
+    assert.object(options, InitializeOptions);
     assert(!_Space.space, 'already initialized');
 
+    /** @type {Record<string, string>} */
+    _Space.context = Object.freeze({
+        ...Object.fromEntries(Object.entries(context).filter(([key, value]) => is.string(value) && options.context?.[key] !== false)),
+        ...Object.fromEntries(Object.entries(options.context || {}).filter(([key, value]) => is.string(value)))
+    });
+
     /** @type {fua.module.persistence.DataFactory} */
-    _Space.factory = new persist.DataFactory({...context, ...options.context});
+    _Space.factory = new persist.DataFactory(_Space.context);
     assert.instance(_Space.factory, persist.DataFactory);
 
     const StoreModule = _Space.requireStoreModule(options.store?.module || 'inmemory');
