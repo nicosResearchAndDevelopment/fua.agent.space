@@ -8,7 +8,7 @@
   ],
   "dependencies": {
     "@nrd/fua.core.assert": "^1.0.0",
-    "@nrd/fua.core.is": "^1.0.0",
+    "@nrd/fua.core.is": "^1.0.4",
     "@nrd/fua.module.space": "^1.0.0",
     "@nrd/fua.module.persistence": "^1.0.0",
     "@nrd/fua.module.rdf": "^1.0.1",
