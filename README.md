@@ -1,1 +1,1 @@
-# @nrd/fua.agent.space
+# @fua/agent.space

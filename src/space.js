@@ -1,18 +1,18 @@
 const
     Space              = exports,
     {name: identifier} = require('../package.json'),
-    assert             = require('@nrd/fua.core.assert');
+    assert             = require('@fua/core.assert');
 
 assert(!global[identifier], 'unable to load a second uncached version of the singleton ' + identifier);
 Object.defineProperty(global, identifier, {value: Space, configurable: false, writable: false, enumerable: false});
 
 const
     _Space            = Object.create(null),
-    is                = require('@nrd/fua.core.is'),
-    space             = require('@nrd/fua.module.space'),
-    persist           = require('@nrd/fua.module.persistence'),
-    rdf               = require('@nrd/fua.module.rdf'),
-    context           = require('@nrd/fua.resource.context'),
+    is                = require('@fua/core.is'),
+    space             = require('@fua/module.space'),
+    persist           = require('@fua/module.persistence'),
+    rdf               = require('@fua/module.rdf'),
+    context           = require('@fua/resource.context'),
     InitializeOptions = {
         context: is.validator.optional(is.object)
     };
@@ -30,33 +30,33 @@ _Space.requireStoreModule = function (type) {
     switch (type) {
         case 'inmemory':
         case 'module.persistence.inmemory':
-        case '@nrd/fua.module.persistence.inmemory':
-            return require('@nrd/fua.module.persistence.inmemory');
+        case '@fua/module.persistence.inmemory':
+            return require('@fua/module.persistence.inmemory');
 
         case 'filesystem':
         case 'module.persistence.filesystem':
-        case '@nrd/fua.module.persistence.filesystem':
-            return require('@nrd/fua.module.persistence.filesystem');
+        case '@fua/module.persistence.filesystem':
+            return require('@fua/module.persistence.filesystem');
 
         case 'mongodb':
         case 'module.persistence.mongodb':
-        case '@nrd/fua.module.persistence.mongodb':
-            return require('@nrd/fua.module.persistence.mongodb');
+        case '@fua/module.persistence.mongodb':
+            return require('@fua/module.persistence.mongodb');
 
         case 'redis':
         case 'module.persistence.redis':
-        case '@nrd/fua.module.persistence.redis':
-            return require('@nrd/fua.module.persistence.redis');
+        case '@fua/module.persistence.redis':
+            return require('@fua/module.persistence.redis');
 
         case 'neo4j':
         case 'module.persistence.neo4j':
-        case '@nrd/fua.module.persistence.neo4j':
-            return require('@nrd/fua.module.persistence.neo4j');
+        case '@fua/module.persistence.neo4j':
+            return require('@fua/module.persistence.neo4j');
 
         case 'sqlite':
         case 'module.persistence.sqlite':
-        case '@nrd/fua.module.persistence.sqlite':
-            return require('@nrd/fua.module.persistence.sqlite');
+        case '@fua/module.persistence.sqlite':
+            return require('@fua/module.persistence.sqlite');
 
         default:
             throw new Error('unknown StoreModule type "' + type + '"');
